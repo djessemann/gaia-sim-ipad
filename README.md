@@ -1,5 +1,7 @@
 # GAIA — The Living Planet
 
+**▶ Play it live: https://djessemann.github.io/gaia-sim-ipad/**
+
 A tablet-optimized, browser-based planetary life simulation, built as an
 original homage to the classic god-game **SimEarth** (Maxis, 1990) and the
 **Gaia hypothesis** of James Lovelock. You sculpt a planet's geology,
@@ -12,7 +14,9 @@ the Stone Age to the Exodus — or watch the whole biosphere collapse.
 
 ## Play
 
-It's a static web app — no build step.
+The easiest way is the hosted version: **https://djessemann.github.io/gaia-sim-ipad/**
+
+Or run it locally — it's a static web app, no build step:
 
 ```bash
 # from the repo root, serve the folder and open it in a browser:
