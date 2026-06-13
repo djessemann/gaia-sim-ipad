@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GAIA — The Living Planet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Gaia">
+<meta name="theme-color" content="#0b1320">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon.svg">
+<link rel="icon" href="./icons/icon.svg">
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- THE MAP -->
+  <canvas id="map"></canvas>
+
+  <!-- TOP STATUS BAR -->
+  <header id="topbar">
+    <button id="btn-menu" class="hdr-btn" title="Menu / Scenarios">☰</button>
+    <div class="stat"><label>Year</label><span id="st-year">—</span></div>
+    <div class="stat"><label>Scale</label><span id="st-scale">—</span></div>
+    <div class="stat"><label>Temp</label><span id="st-temp">—</span></div>
+    <div class="stat"><label>CO₂</label><span id="st-co2">—</span></div>
+    <div class="stat"><label>O₂</label><span id="st-o2">—</span></div>
+    <div class="stat"><label>Biomass</label><span id="st-bio">—</span></div>
+    <div class="stat"><label>Life</label><span id="st-life">—</span></div>
+    <div class="stat"><label>Civ</label><span id="st-cities">—</span></div>
+    <div class="stat energy"><label>Energy</label><span id="st-energy">—</span></div>
+    <div class="hdr-tools">
+      <button id="btn-graphs" class="hdr-btn" title="Data graphs">📈</button>
+      <button id="btn-models" class="hdr-btn" title="Model controls">⚙</button>
+      <button id="btn-log" class="hdr-btn" title="Event log">✉</button>
+    </div>
+  </header>
+
+  <!-- LEFT TOOL PALETTE -->
+  <aside id="leftbar">
+    <button id="btn-toolbar" class="collapse-btn" title="Hide/show tools">⟨⟩</button>
+    <div id="toolbar"></div>
+    <div id="tool-readout"></div>
+  </aside>
+
+  <!-- BOTTOM CONTROL BAR -->
+  <footer id="bottombar">
+    <div class="ctl-block">
+      <label>Time Scale</label>
+      <div id="scale-buttons" class="btn-row"></div>
+    </div>
+    <div class="ctl-block">
+      <label>Speed</label>
+      <div id="speed-buttons" class="btn-row"></div>
+    </div>
+    <div class="ctl-block grow">
+      <label>Map View</label>
+      <div id="overlay-buttons" class="btn-row wrap"></div>
+    </div>
+    <div class="ctl-block">
+      <label>Display</label>
+      <div class="btn-row">
+        <button id="btn-clouds" class="disp-btn">☁ Clouds</button>
+        <button id="btn-grid" class="disp-btn">▦ Grid</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INSPECTOR -->
+  <section id="inspector" class="panel hidden">
+    <div class="panel-head"><span>Inspector</span><button class="panel-close">✕</button></div>
+    <div id="inspector-body"></div>
+  </section>
+
+  <!-- DATA GRAPHS -->
+  <section id="graphs" class="panel hidden">
+    <div class="panel-head"><span>Planetary History</span><button class="panel-close">✕</button></div>
+    <canvas id="graph-canvas"></canvas>
+    <div class="legend">Temp · CO₂ · O₂ · Biomass · Cities (over time)</div>
+  </section>
+
+  <!-- MODEL CONTROLS -->
+  <section id="models" class="panel hidden">
+    <div class="panel-head"><span>Model Controls</span><button class="panel-close">✕</button></div>
+    <div id="models-body"></div>
+  </section>
+
+  <!-- EVENT LOG -->
+  <section id="log" class="panel hidden">
+    <div class="panel-head"><span>Event Log</span><button class="panel-close">✕</button></div>
+    <div id="log-body"></div>
+  </section>
+
+  <!-- MENU / SCENARIOS -->
+  <section id="menu" class="panel hidden big">
+    <div class="panel-head"><span>GAIA — The Living Planet</span><button class="panel-close">✕</button></div>
+    <p class="menu-intro">A planetary simulation in the spirit of the classic god-game. Sculpt the land, balance the air, seed life, and shepherd it from primordial soup to starfaring civilization — or watch it all burn. Choose a world:</p>
+    <div id="scenario-list"></div>
+    <div class="menu-actions">
+      <button id="btn-save">💾 Save Planet</button>
+      <button id="btn-load">📂 Load Planet</button>
+    </div>
+    <p class="menu-tip">Tip: One finger paints with the selected tool (or drag to pan in Examine mode). Two fingers pinch to zoom.</p>
+  </section>
+
+  <div id="toast"></div>
+</div>
+
+<!-- scripts in dependency order (no build step required) -->
+<script src="./js/config.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/world.js"></script>
+<script src="./js/atmosphere.js"></script>
+<script src="./js/biosphere.js"></script>
+<script src="./js/civilization.js"></script>
+<script src="./js/scenarios.js"></script>
+<script src="./js/simulation.js"></script>
+<script src="./js/tools.js"></script>
+<script src="./js/graphics.js"></script>
+<script src="./js/render.js"></script>
+<script src="./js/ui.js"></script>
+<script src="./js/input.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>

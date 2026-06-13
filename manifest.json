@@ -1,0 +1,14 @@
+{
+  "name": "GAIA — The Living Planet",
+  "short_name": "Gaia",
+  "description": "A planetary life simulation for tablets — sculpt land, balance the atmosphere, evolve life and civilization.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#0b1320",
+  "theme_color": "#0b1320",
+  "icons": [
+    { "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
