@@ -5,16 +5,16 @@ import { LIFE, TUNE } from './config.js';
 import { eruptAt } from './geosphere.js';
 
 export const TOOLS = [
-  { id: 'examine',  name: 'Examine', icon: 'examine', cost: 0,  radius: 0, desc: 'Probe a cell' },
-  { id: 'raise',    name: 'Raise',   icon: 'raise',   cost: 4,  radius: 1, desc: 'Push land up' },
-  { id: 'lower',    name: 'Lower',   icon: 'lower',   cost: 4,  radius: 1, desc: 'Dig / flood' },
-  { id: 'water',    name: 'Water',   icon: 'water',   cost: 3,  radius: 1, desc: 'Add ocean' },
-  { id: 'life',     name: 'Seed',    icon: 'seed',    cost: 6,  radius: 1, desc: 'Seed microbes' },
-  { id: 'forest',   name: 'Forest',  icon: 'forest',  cost: 10, radius: 1, desc: 'Plant flora' },
-  { id: 'volcano',  name: 'Volcano', icon: 'volcano', cost: 25, radius: 0, desc: 'Erupt: land + CO2' },
-  { id: 'meteor',   name: 'Meteor',  icon: 'meteor',  cost: 60, radius: 2, desc: 'Impact & dust' },
-  { id: 'warm',     name: 'Warm',    icon: 'warm',    cost: 8,  radius: 1, desc: 'Inject CO2 heat' },
-  { id: 'cool',     name: 'Cool',    icon: 'cool',    cost: 8,  radius: 1, desc: 'Scrub CO2' },
+  { id: 'examine',  name: 'Examine', icon: '🔍', cost: 0,  radius: 0, desc: 'Probe a cell' },
+  { id: 'raise',    name: 'Raise',   icon: '⛰️', cost: 4,  radius: 1, desc: 'Push land up' },
+  { id: 'lower',    name: 'Lower',   icon: '🕳️', cost: 4,  radius: 1, desc: 'Dig / flood' },
+  { id: 'water',    name: 'Water',   icon: '💧', cost: 3,  radius: 1, desc: 'Add ocean' },
+  { id: 'life',     name: 'Seed',    icon: '🌱', cost: 6,  radius: 1, desc: 'Seed microbes' },
+  { id: 'forest',   name: 'Forest',  icon: '🌳', cost: 10, radius: 1, desc: 'Plant flora' },
+  { id: 'volcano',  name: 'Volcano', icon: '🌋', cost: 25, radius: 0, desc: 'Erupt: land + CO₂' },
+  { id: 'meteor',   name: 'Meteor',  icon: '☄️', cost: 60, radius: 2, desc: 'Impact & dust' },
+  { id: 'warm',     name: 'Warm',    icon: '🔥', cost: 8,  radius: 1, desc: 'Inject CO₂ heat' },
+  { id: 'cool',     name: 'Cool',    icon: '❄️', cost: 8,  radius: 1, desc: 'Scrub CO₂' },
 ];
 
 // Apply a tool at (x,y). Returns an info object for the Examine tool, else null.

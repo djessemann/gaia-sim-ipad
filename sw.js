@@ -1,14 +1,12 @@
 // GAIA service worker — offline app-shell caching so the sim installs and runs
 // with no network. Bump CACHE when shipping new assets.
 
-const CACHE = 'gaia-v3';
+const CACHE = 'gaia-v4';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './css/styles.css',
-  './css/font.css',
-  './js/icons.js',
   './icons/icon.svg',
   './icons/icon-192.png',
   './icons/icon-512.png',

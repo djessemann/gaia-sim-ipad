@@ -4,7 +4,6 @@
 import { TOOLS } from './tools.js';
 import { SCENARIOS } from './scenarios.js';
 import { SPEEDS, TIMESCALES, TECH_AGES, LIFE_NAMES } from './config.js';
-import { iconSVG } from './icons.js';
 
 const VIEWS = [
   { id: 'terrain', name: 'Terrain' },
@@ -71,12 +70,9 @@ export class UI {
     p.innerHTML = '';
     for (const t of TOOLS) {
       const b = el('div', 'tool' + (t.id === this.tool ? ' active' : ''));
-      const ico = el('div', 'ico'); ico.innerHTML = iconSVG(t.icon, 22);
-      b.appendChild(ico);
+      b.appendChild(el('div', 'ico', t.icon));
       b.appendChild(el('div', 'nm', t.name));
-      const cost = el('div', 'cost');
-      cost.innerHTML = t.cost ? iconSVG('bolt', 9) + t.cost : '&mdash;';
-      b.appendChild(cost);
+      b.appendChild(el('div', 'cost', t.cost ? '⚡' + t.cost : '—'));
       b.title = t.desc;
       b.onclick = () => {
         this.tool = t.id;
@@ -90,10 +86,9 @@ export class UI {
   _buildSpeed() {
     const g = document.getElementById('speedGroup');
     g.innerHTML = '';
-    const icons = ['pause', 'play', 'fast', 'turbo'];
+    const icons = ['⏸', '▶', '▶▶', '⏩'];
     SPEEDS.forEach((sp, i) => {
-      const b = el('button', 'btn icon-btn' + (i === this.speed ? ' active' : ''));
-      b.innerHTML = iconSVG(icons[i], 18);
+      const b = el('button', 'btn' + (i === this.speed ? ' active' : ''), icons[i]);
       b.title = sp.name;
       b.onclick = () => {
         this.speed = i;
@@ -105,14 +100,11 @@ export class UI {
     });
 
     const ts = document.getElementById('timescaleBtn');
-    ts.querySelector('.btn-ic').innerHTML = iconSVG('clock', 16);
     ts.onclick = () => {
       this.sim.timescale = (this.sim.timescale + 1) % TIMESCALES.length;
-      document.getElementById('tsLabel').textContent = TIMESCALES[this.sim.timescale].name;
+      ts.textContent = '⏱ ' + TIMESCALES[this.sim.timescale].name;
     };
-    const menuBtn = document.getElementById('menuBtn');
-    menuBtn.querySelector('.btn-ic').innerHTML = iconSVG('menu', 16);
-    menuBtn.onclick = () => this.openMenu();
+    document.getElementById('menuBtn').onclick = () => this.openMenu();
   }
 
   _buildMenu() {
@@ -131,9 +123,7 @@ export class UI {
       };
       list.appendChild(b);
     }
-    const reseed = document.getElementById('reseedBtn');
-    reseed.innerHTML = iconSVG('dice', 16) + '<span>New Seed</span>';
-    reseed.onclick = () => {
+    document.getElementById('reseedBtn').onclick = () => {
       this.h.onReseed(this.selectedScenario);
       this.closeMenu();
     };
@@ -162,7 +152,7 @@ export class UI {
       `<div><span class="k">Rain</span> <b>${(info.rainfall * 100 | 0)}%</b></div>` +
       `<div><span class="k">Life</span> <b>${LIFE_NAMES[info.life]}</b></div>` +
       (info.biomass > 0 ? `<div><span class="k">Biomass</span> <b>${(info.biomass * 100 | 0)}%</b></div>` : '') +
-      (info.city ? `<div><b>${iconSVG('city', 13)} Settlement</b></div>` : '') +
+      (info.city ? `<div><b>🏙 Settlement</b></div>` : '') +
       (info.pollution > 0.05 ? `<div><span class="k">Pollution</span> <b>${(info.pollution * 100 | 0)}%</b></div>` : '');
     clearTimeout(this._exTimer);
     this._exTimer = setTimeout(() => box.classList.add('hidden'), 4000);
@@ -183,7 +173,7 @@ export class UI {
     document.getElementById('energyBar').style.width = (sim.energy / 2000 * 100) + '%';
     // Clock
     document.getElementById('clock').textContent = formatYear(sim.year);
-    document.getElementById('tsLabel').textContent = TIMESCALES[sim.timescale].name;
+    document.getElementById('timescaleBtn').textContent = '⏱ ' + TIMESCALES[sim.timescale].name;
 
     const S = this.statEls;
     setStat(S.temp, sim.globalTemp.toFixed(1) + '°C', tempClass(sim.globalTemp));
