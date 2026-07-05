@@ -6,11 +6,12 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#0b1020" />
+  <meta name="theme-color" content="#0d140d" />
   <title>GAIA — Planetary Simulator</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon.svg" />
   <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="stylesheet" href="css/font.css" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -27,7 +28,7 @@
           <div class="meter-track bevel-in"><div id="gaiaBar" class="meter-fill"></div></div>
         </div>
         <div class="meter" title="Energy">
-          <span class="meter-label">⚡</span>
+          <span class="meter-label"><svg class="ic" viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M9 1L3 9h4l-1 6 7-9H9z"/></svg></span>
           <div class="meter-track bevel-in"><div id="energyBar" class="meter-fill energy"></div></div>
         </div>
       </div>
@@ -52,8 +53,8 @@
     <!-- Bottom control bar -->
     <footer id="controls" class="bevel-out">
       <div id="speedGroup" class="btn-group"></div>
-      <button id="timescaleBtn" class="btn">⏱ Geologic</button>
-      <button id="menuBtn" class="btn">☰ Menu</button>
+      <button id="timescaleBtn" class="btn"><span class="btn-ic"></span><span id="tsLabel">Geologic</span></button>
+      <button id="menuBtn" class="btn"><span class="btn-ic"></span><span>Menu</span></button>
     </footer>
   </div>
 
@@ -64,7 +65,7 @@
       <p class="tagline">A living planet in the palm of your hand.</p>
       <div id="scenarioList"></div>
       <div class="menu-actions">
-        <button id="reseedBtn" class="btn">🎲 New Seed</button>
+        <button id="reseedBtn" class="btn">New Seed</button>
         <button id="closeMenuBtn" class="btn primary">Resume</button>
       </div>
       <p class="hint">Tap a world to begin. Keep it in the Gaia window — not too hot, not too cold — and shepherd life from microbes to minds. Pinch to zoom in on the map (or double-tap) to watch life up close.</p>
