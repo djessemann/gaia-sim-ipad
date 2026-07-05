@@ -29,6 +29,10 @@ export class Renderer {
     this.ctx = canvas.getContext('2d', { alpha: false });
     this.sim = sim;
     this.view = 'terrain';
+    // Camera: zoom >= 1, with (ox,oy) the top-left of the visible region in
+    // normalized map coordinates (0..1). Lets the player pinch in on detail.
+    this.cam = { zoom: 1, ox: 0, oy: 0 };
+    this.maxZoom = 8;
     const w = sim.world.w, h = sim.world.h;
     this.buf = document.createElement('canvas');
     this.buf.width = w * CELL;
@@ -40,6 +44,48 @@ export class Renderer {
   }
 
   setView(v) { this.view = v; }
+
+  // --- Camera controls (used by input.js) --------------------------------
+  clampCam() {
+    const c = this.cam;
+    c.zoom = Math.max(1, Math.min(this.maxZoom, c.zoom));
+    const m = 1 - 1 / c.zoom;               // max top-left origin
+    c.ox = Math.min(m, Math.max(0, c.ox));
+    c.oy = Math.min(m, Math.max(0, c.oy));
+  }
+
+  // Zoom by `factor` about a normalized canvas anchor (nx,ny in 0..1) so the
+  // map point under the fingers stays put — the natural pinch feel.
+  zoomAt(factor, nx, ny) {
+    const c = this.cam;
+    const old = c.zoom;
+    const mapU = c.ox + nx / old, mapV = c.oy + ny / old;
+    c.zoom = Math.max(1, Math.min(this.maxZoom, old * factor));
+    c.ox = mapU - nx / c.zoom;
+    c.oy = mapV - ny / c.zoom;
+    this.clampCam();
+  }
+
+  // Pan by a normalized canvas delta (two-finger drag).
+  panBy(dnx, dny) {
+    this.cam.ox -= dnx / this.cam.zoom;
+    this.cam.oy -= dny / this.cam.zoom;
+    this.clampCam();
+  }
+
+  resetZoom() { this.cam.zoom = 1; this.cam.ox = 0; this.cam.oy = 0; }
+
+  // Convert a normalized canvas position (0..1) to a grid cell under the camera.
+  screenToCell(nx, ny) {
+    const c = this.cam;
+    const u = c.ox + nx / c.zoom;
+    const v = c.oy + ny / c.zoom;
+    const w = this.sim.world;
+    return {
+      gx: Math.max(0, Math.min(w.w - 1, Math.floor(u * w.w))),
+      gy: Math.max(0, Math.min(w.h - 1, Math.floor(v * w.h))),
+    };
+  }
 
   // Returns [colorA, colorB, mix] for a cell under the current view mode.
   cellColors(i) {
@@ -143,12 +189,18 @@ export class Renderer {
     }
     this.bctx.putImageData(this.img, 0, 0);
 
-    // Scale buffer to the display canvas, nearest-neighbour for crisp pixels.
+    // Scale the visible camera region of the buffer to the display canvas,
+    // nearest-neighbour for crisp pixels. Zooming just narrows the source rect.
     const ctx = this.ctx;
     ctx.imageSmoothingEnabled = false;
     ctx.fillStyle = PAL.screen;
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.drawImage(this.buf, 0, 0, this.canvas.width, this.canvas.height);
+    const c = this.cam;
+    const sw = this.buf.width / c.zoom;
+    const sh = this.buf.height / c.zoom;
+    const sx = c.ox * this.buf.width;
+    const sy = c.oy * this.buf.height;
+    ctx.drawImage(this.buf, sx, sy, sw, sh, 0, 0, this.canvas.width, this.canvas.height);
   }
 }
 

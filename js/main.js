@@ -41,6 +41,19 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 
+// Zoom badge: shows current magnification and resets zoom when tapped.
+const zoomBadge = document.getElementById('zoomBadge');
+zoomBadge.addEventListener('click', () => renderer.resetZoom());
+function updateZoomBadge() {
+  const z = renderer.cam.zoom;
+  if (z > 1.02) {
+    zoomBadge.classList.remove('hidden');
+    zoomBadge.textContent = z.toFixed(1) + '×';
+  } else {
+    zoomBadge.classList.add('hidden');
+  }
+}
+
 // --- Game loop: fixed simulation ticks, decoupled render ---
 let acc = 0, last = performance.now();
 function frame(now) {
@@ -62,6 +75,7 @@ function frame(now) {
 
   renderer.render();
   ui.update();
+  updateZoomBadge();
   requestAnimationFrame(frame);
 }
 
@@ -72,6 +86,9 @@ function recoverFromShocks() {
     if (sim.solar >= TUNE.baseSolar - 0.001) sim.meteorWinter = 0;
   }
 }
+
+// Expose a small debug handle (used by tests and the browser console).
+window.__gaia = { sim, renderer, ui };
 
 // Boot: generate the first world and show the menu.
 startScenario(sim, SCENARIOS[0], randomSeed());

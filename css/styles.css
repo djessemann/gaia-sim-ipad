@@ -99,6 +99,26 @@ html, body {
 .popup .k { color: var(--panel-shadow); }
 .popup b { color: var(--ink); }
 
+/* Zoom indicator / reset button (bottom-right of the map) */
+.zoom-badge {
+  position: absolute; right: 6px; bottom: 6px;
+  min-height: 34px; padding: 4px 10px;
+  font-size: 13px; font-weight: bold; color: var(--ink);
+  font-variant-numeric: tabular-nums; cursor: pointer;
+  background: var(--panel);
+  border-top: 2px solid var(--panel-light);
+  border-left: 2px solid var(--panel-light);
+  border-right: 2px solid var(--panel-shadow);
+  border-bottom: 2px solid var(--panel-shadow);
+  opacity: 0.9;
+}
+.zoom-badge:active {
+  border-top: 2px solid var(--panel-shadow);
+  border-left: 2px solid var(--panel-shadow);
+  border-right: 2px solid var(--panel-light);
+  border-bottom: 2px solid var(--panel-light);
+}
+
 /* --- View tabs --- */
 .tabrow {
   display: flex; gap: 2px; flex: 0 0 auto;
