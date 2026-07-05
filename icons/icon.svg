@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="space" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#16213e"/>
+      <stop offset="100%" stop-color="#0b1020"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="38%" cy="34%" r="70%">
+      <stop offset="0%" stop-color="#5fb14a"/>
+      <stop offset="55%" stop-color="#2f7d34"/>
+      <stop offset="100%" stop-color="#12306b"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#space)"/>
+  <circle cx="256" cy="256" r="168" fill="url(#planet)"/>
+  <!-- chunky continents -->
+  <g fill="#5fb14a" opacity="0.95">
+    <rect x="150" y="150" width="60" height="40"/>
+    <rect x="190" y="180" width="50" height="60"/>
+    <rect x="300" y="130" width="70" height="50"/>
+    <rect x="280" y="300" width="90" height="60"/>
+    <rect x="160" y="300" width="60" height="50"/>
+  </g>
+  <!-- ice caps -->
+  <ellipse cx="256" cy="102" rx="70" ry="22" fill="#cfe4f2" opacity="0.9"/>
+  <ellipse cx="256" cy="410" rx="60" ry="18" fill="#cfe4f2" opacity="0.9"/>
+  <!-- atmosphere rim -->
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#6fe0c0" stroke-width="6" opacity="0.5"/>
+</svg>

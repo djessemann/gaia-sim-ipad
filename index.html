@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>GAIA — Planetary Simulator</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon.svg" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Title / status bar -->
+    <header id="titlebar" class="bevel-out">
+      <div class="tb-left">
+        <span id="planetName">GAIA</span>
+        <span id="clock" class="readout">0 YR</span>
+      </div>
+      <div class="tb-right">
+        <div class="meter" title="Gaia Health">
+          <span class="meter-label">GAIA</span>
+          <div class="meter-track bevel-in"><div id="gaiaBar" class="meter-fill"></div></div>
+        </div>
+        <div class="meter" title="Energy">
+          <span class="meter-label">⚡</span>
+          <div class="meter-track bevel-in"><div id="energyBar" class="meter-fill energy"></div></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Map -->
+    <main id="stage">
+      <canvas id="map"></canvas>
+      <div id="examine" class="popup bevel-out hidden"></div>
+    </main>
+
+    <!-- View-layer tabs -->
+    <nav id="viewTabs" class="tabrow"></nav>
+
+    <!-- Data readouts -->
+    <section id="stats" class="bevel-in"></section>
+
+    <!-- Tool palette -->
+    <section id="palette" class="bevel-out"></section>
+
+    <!-- Bottom control bar -->
+    <footer id="controls" class="bevel-out">
+      <div id="speedGroup" class="btn-group"></div>
+      <button id="timescaleBtn" class="btn">⏱ Geologic</button>
+      <button id="menuBtn" class="btn">☰ Menu</button>
+    </footer>
+  </div>
+
+  <!-- Scenario / new-planet menu -->
+  <div id="menu" class="modal hidden">
+    <div class="modal-box bevel-out">
+      <h1>GAIA</h1>
+      <p class="tagline">A living planet in the palm of your hand.</p>
+      <div id="scenarioList"></div>
+      <div class="menu-actions">
+        <button id="reseedBtn" class="btn">🎲 New Seed</button>
+        <button id="closeMenuBtn" class="btn primary">Resume</button>
+      </div>
+      <p class="hint">Tap a world to begin. Keep it in the Gaia window — not too hot, not too cold — and shepherd life from microbes to minds.</p>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
