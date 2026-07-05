@@ -5,32 +5,32 @@ import { LIFE, TUNE } from './config.js';
 export const SCENARIOS = [
   {
     id: 'earth', name: 'Young Earth',
-    desc: 'A watery world fresh from formation. Nurse it to life.',
+    desc: 'Warm, watery, high CO2. A good place to start.',
     seaLevel: 0.62,
     setup(sim) { sim.co2 = 900; sim.o2 = 0.3; sim.solar = 1.0; seedMicrobes(sim, 30); },
   },
   {
     id: 'aquarium', name: 'Aquarium',
-    desc: 'Almost all ocean. Perfect for evolving sea life.',
+    desc: 'Almost all ocean. Best for sea life.',
     seaLevel: 0.90,
     setup(sim) { sim.co2 = 500; sim.o2 = 2; sim.solar = 1.0; seedMicrobes(sim, 80); },
   },
   {
     id: 'snowball', name: 'Snowball',
-    desc: 'A frozen planet gripped by ice-albedo feedback. Thaw it.',
+    desc: 'Frozen and ice-covered. Warm it to thaw.',
     seaLevel: 0.60,
     setup(sim) { sim.co2 = 180; sim.o2 = 5; sim.solar = 0.82;
       for (let i = 0; i < sim.world.temp.length; i++) { sim.world.temp[i] = -40; sim.world.ice[i] = 1; } },
   },
   {
     id: 'venus', name: 'Runaway',
-    desc: 'A choking greenhouse. Can you cool it before it bakes?',
+    desc: 'Very hot, thick greenhouse. Cool it down.',
     seaLevel: 0.35,
     setup(sim) { sim.co2 = 4000; sim.o2 = 0; sim.solar = 1.15; },
   },
   {
     id: 'mars', name: 'Red Desert',
-    desc: 'Cold, dry, thin air. A terraforming challenge.',
+    desc: 'Cold, dry, thin air. Hard to terraform.',
     seaLevel: 0.15,
     setup(sim) { sim.co2 = 120; sim.o2 = 0; sim.solar = 0.72; },
   },
